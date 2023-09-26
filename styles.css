@@ -3,7 +3,7 @@
 }
 
 @media only screen and (max-device-width: 480px){
-*{font-size: .8cm}
+*{font-size: 1cm}
 }
 
 input::-webkit-outer-spin-button,
