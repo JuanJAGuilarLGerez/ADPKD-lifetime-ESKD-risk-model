@@ -1,9 +1,9 @@
 @media only screen and (min-device-width: 480px){
-*{font-size: .35cm}
+*{font-size: .36cm}
 }
 
 @media only screen and (max-device-width: 480px){
-*{font-size: .8cm}
+*{font-size: .7cm}
 }
 
 input::-webkit-outer-spin-button,
@@ -37,7 +37,7 @@ body{
 .header_title{
 	margin:0;
 	padding: 0;
-	background-image:url(Imagenes/header.jpg);
+	background-image:url(images/header.jpg);
 	background-size:cover;
 }
 
@@ -68,7 +68,7 @@ body{
 .header_navigator {
 	padding: 0 0 .5em 2.4em;
 	background-color:f8f8f8;
-	border-bottom:solid #e0e0e0 thin;
+	border-bottom:solid #e0e0e0 .3mm;
 }
 
 .header_navigator ul{
@@ -129,7 +129,7 @@ section {
 .calculator_input {
 	flex-grow:9999;
 	width:30em;
-	border: solid #e0e0e0 thin;
+	border: solid #e0e0e0 .3mm;
 	border-radius:.3em;
 	background-color:f8f8f8;
 	padding:1.2em 1em 1em 1em;
@@ -139,7 +139,7 @@ section {
 .units{
 	display:flex;
 	padding: 0 0 1.2em 0;
-	border-bottom: solid #CFCFCF thin;
+	border-bottom: solid #CFCFCF .3mm;
 	margin: 0 0 1em 0;
 }
 
@@ -183,7 +183,7 @@ section {
 .calculator_predictor_value input {
     width:100%;
     padding:.6em;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 	border-radius:.3em;
 }
 
@@ -207,7 +207,7 @@ section {
 .calculator_predictor_value_height_international input {
     width:100%;
     padding:.6em;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 	border-radius:.3em;
 }
 
@@ -226,7 +226,7 @@ section {
 #height_imperial_ft{
 	width: 50%;
     padding:.6em;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 	border-radius:.3em 0 0 .3em;
 	margin-right:-.1em;
 }
@@ -234,19 +234,20 @@ section {
 #height_imperial_in{
 	width: 50.5%;
     padding:.6em;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 	border-radius: 0 .3em .3em 0;
 	margin:0;
 }
 
-#height_imperial_units{
-	margin:0 -5em 0 -2em;
-	color:595959;
+
+#height_imperial_units_ft {
+	margin: 0 1.2em 0 -2em;
+	color:595959;	
 }
 
-.calculator_predictor_value_height_imperial span {
-	margin-left:-3.5em;
-	color:595959;	
+#height_imperial_units_in{
+	margin:0 -5em 0 -2em;
+	color:595959;
 }
 
 .sex_male {
@@ -273,7 +274,7 @@ section {
 }
 
 .creatinine_units_mg{
-	width:5em;
+	width:5.2em;
 	flex-grow:9999;
 	padding:.6em;
 	border-radius:0;
@@ -281,7 +282,7 @@ section {
 }
 
 .creatinine_units_mmol{
-	width:5em;
+	width:5.2em;
 	flex-grow:9999;
 	padding:.6em;
 	border-radius:0 .3em .3em 0;
@@ -290,7 +291,7 @@ section {
 
 .calculator_input_kidney_side{
 	padding: .6em;
-	border-top: solid #CFCFCF thin;
+	border-top: solid #CFCFCF .3mm;
 	margin: 1em 0 0 0;
 	text-align: center;
 }
@@ -345,7 +346,7 @@ section {
 	border-radius: .3em;
 	font-size: 1em;
 	color:#953031;
-	border: solid #953031 thin;
+	border: solid #953031 .3mm;
 }
 
 .calculator_output {
@@ -353,7 +354,7 @@ section {
 	flex-grow: 9999;
 	margin:0;
 	display: block;
-	border: solid #e0e0e0 thin;
+	border: solid #e0e0e0 .3mm;
 	border-radius:.3em;
 	background-color:f8f8f8;
 	margin:1em 1em 0 1em;
@@ -375,7 +376,7 @@ section {
 	margin:.3em;
 	margin-right:-.2em;
 	background-color:#C2E5D7;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 }
 
 .calculate:hover {
@@ -385,7 +386,7 @@ section {
 .calculate:disabled{
 	background-color:f8f8f8;
 	color:#BFBFBF;
-	border: solid #BFBFBF thin;
+	border: solid #BFBFBF .3mm;
 	cursor:default;
 }
 
@@ -398,7 +399,7 @@ section {
 	cursor:pointer;
 	margin:.3em;
 	margin-left:-.2em;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 	background-color:#E6C9C9;
 }
 
@@ -413,7 +414,7 @@ section {
 .calculator_output_result {
 	color:#0B0B0B;	
 	padding: 0em 1.5em 0 1.5em;
-	border-top: solid #CFCFCF thin;
+	border-top: solid #CFCFCF .3mm;
 	margin: 1em 0 0 0;
 	text-align: center;
 	align-content:space-around;
@@ -450,32 +451,32 @@ section {
 	flex-basis: 5%;
 	border-radius:.3em 0 0 .3em;
 	background-color:#C2E5D7;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 }
 
 #calculator_output_result_risk_box_2{
 	flex-basis: 30%;
 	background-color:#D7EBD1;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 }
 
 #calculator_output_result_risk_box_3{
 	flex-basis: 30%;
 	background-color:#FFFADD;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 }
 
 #calculator_output_result_risk_box_4{
 	flex-basis: 30%;
 	background-color:#F5E5D8;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 }
 
 #calculator_output_result_risk_box_5{
 	flex-basis: 5%;
 	border-radius:0 .3em .3em 0;
 	background-color:#E6C9C9;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 }
 
 #calculator_output_result_risk_pre_triangle{
@@ -517,7 +518,7 @@ footer {
 
 .footer {
 	width:50em;
-	border: solid #c8e7f0 thin;
+	border: solid #c8e7f0 .3mm;
 	border-radius:.3em;
 	background-color:deecf6;
 	margin:1em;
@@ -578,7 +579,7 @@ footer {
 
 .button_grey {
 	background-color:#E9E9E9;
-	border: solid #868686 thin;
+	border: solid #868686 .3mm;
 	color:#0E0E0E;
 	cursor:pointer;
 }
@@ -605,7 +606,7 @@ footer {
 
 .how_to_box {
 	width:50em;
-	border: solid #e0e0e0 thin;
+	border: solid #e0e0e0 .3mm;
 	border-radius:.3em;
 	background-color:f8f8f8;
 	padding: 0em 1em 0em 1em;
@@ -619,7 +620,7 @@ footer {
 }
 
 .how_to_axis_2{
-	border-top: solid #CFCFCF thin;
+	border-top: solid #CFCFCF .3mm;
 	padding: 1em 0 1em 0;
 	text-align: center;
 	margin: 0;
