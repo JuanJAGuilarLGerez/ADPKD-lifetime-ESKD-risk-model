@@ -1,0 +1,331 @@
+<html>
+	
+<head>
+	<title>ADPKD lifetime ESRD risk model</title>
+	<link rel="apple-touch-icon" href="Imagenes/apple-touch-icon.png">
+	<link rel="stylesheet" href="styles.css">
+	<script src="jstat.js"></script>
+    <script src="scripts.js" defer></script>   
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" href="Imagenes/icon-152.png">
+	<meta name="theme-color" content="white"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="ADPKD lifetime ESRD risk model">
+	<meta name="msapplication-TileImage" content="Imagenes/icon-144.png">
+	<meta name="msapplication-TileColor" content="#FFFFFF">
+	<link rel="manifest" href="manifest.json">
+	<meta charset="utf-8">
+</head>
+
+<body onLoad="adjust_body_height_and_hide_result()">
+	
+<div id="header_fixed" class="header">
+	<div class="header_title">
+		<ul>
+			<h1 class="header_title_text">ADPKD lifetime ESRD risk model</h1>
+			<img class="header_title_icon" src="Imagenes/incmnsz.png">
+		</ul>
+	</div>
+	<div class="header_navigator">
+		<ui>
+		   <li> <a href="index.html">Calculator</a></li>
+		   <li> <a href="how_to_use.html">How to use</a></li>
+		   <li> <a href="references.html">References</a></li>
+		   <li> <a href="termsandconditions.html">Terms and conditions</a></li>
+		</ui>
+	</div>
+</div>
+	
+<section>
+  <div class="section_introduction section_introduction_short" id="section_introduction">
+		<h1>ESRD risk prediction in patients with type 1 ADPKD</h1>
+		<span>This tool estimates the probability that patients with ADPKD will develop ESRD at 80 years of age, defined as an eGFR ≤15 ml/min/1.73 m&sup2;; based on sex, age, height, current eGFR, and total kidney volume. The tool should only be used by healthcare professionals in patients between 18 and 79 years old, diagnosed with ADPKD type 1 (symmetrical ADPKD), who preserve both kidneys and have no suspicion or evidence of concomitant nephropathy. The information provided by the current tool is intended to assist the treating physician in decision making, but does not replace clinical judgment; since the decision to perform medical interventions remains the treating team’s responsibility. By using this tool, you accept the </span>
+		<span><a href="termsandconditions.html" class="footer_contact_mail">terms and conditions of use </a></span>
+		<span><a href="termsandconditions.html" class="flipped">&#x21F1;</a></span>
+	</div>
+</section>
+	
+<section>
+	<div class="section_calculator">
+		<div class="calculator_input">
+			<div class="units">
+				<button role="button" class="units_international button_grey" id="units_international" name="units_international" onClick="units_international(); check_fields()">SI units</button>
+				<button role="button" class="units_imperial button_grey" id="units_imperial" name="units_imperial" onClick="units_imperial(); check_fields()">Imperial units</button>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Sex</span>
+				<div class="calculator_predictor_value">
+					<button role="button" class="sex_male button_grey" id="sex_male" name="sex_male" onClick="sex_male(); check_fields()">Male</button>
+					<button role="button" class="sex_female button_grey" id="sex_female" name="sex_female" onClick="sex_female(); check_fields()">Female</button>
+				</div>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Age</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="80" id="age" name="age" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units_years">years</span>
+				</div>
+			</div>
+			<div class="error" id="error_age">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_age_message"></span>
+				</div>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Height</span>
+				<div class="calculator_predictor_value_height_international" id="calculator_predictor_value_height_international">
+					<input type="number" value="" min="0" max="100" id="height_international" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units" id="height_international_units"></span>
+				</div>
+				<div class="calculator_predictor_value_height_imperial" id="calculator_predictor_value_height_imperial">
+					<input type="number" value="" min="0" max="100" id="height_imperial_ft" name="height_imperial_ft" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<input type="number" value="" min="0" max="100" id="height_imperial_in" name="height_imperial_in" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span id="height_imperial_units">in</span>
+					<span>ft</span>
+				</div>
+			</div>
+			<div class="error" id="error_height">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_height_message"></span>
+				</div>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Serum creatinine</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="10" id="creatinine" name="creatinine" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<div class="creatinine_units">
+						<button role="button" class="creatinine_units_mg button_grey" id="creatinine_units_mg" name="creatinine_units_mg" onClick="creatinine_units_mg(); check_fields()">mg/dl</button>
+						<button role="button" class="creatinine_units_mmol button_grey" id="creatinine_units_mmol" name="creatinine_units_mmol" onClick="creatinine_units_mmol(); check_fields()">μmol/l</button>
+					</div>
+				</div>
+			</div>
+			<div class="error" id="error_creatinine">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_creatinine_message"></span>
+				</div>
+			</div>
+			<div class="calculator_input_kidney_side">Right kidney</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Height</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="1000" id="rkh" name="rkh" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units" id="rkh_units" name="rkh_units"></span>
+				</div>
+			</div>
+			<div class="error" id="error_rkh">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_rkh_message"></span>
+				</div>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Width</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="1000" id="rkw" name="rkw" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units" id="rkw_units" name="rkw_units"></span>
+				</div>
+			</div>
+			<div class="error" id="error_rkw">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_rkw_message"></span>
+				</div>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Depth</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="1000" id="rkd" name="rkd" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units" id="rkd_units" name="rkd_units"></span>
+				</div>
+			</div>
+			<div class="error" id="error_rkd">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_rkd_message"></span>
+				</div>
+			</div>
+			<div class="calculator_input_kidney_side">Left kidney</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Height</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="1000" id="lkh" name="lkh" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units" id="lkh_units" name="lkh_units"></span>
+				</div>
+			</div>
+			<div class="error" id="error_lkh">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_lkh_message"></span>
+				</div>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Width</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="1000" id="lkw" name="lkw" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units" id="lkw_units" name="lkw_units"></span>
+				</div>
+			</div>
+			<div class="error" id="error_lkw">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_lkw_message"></span>
+				</div>
+			</div>
+			<div class="calculator_predictor">
+				<span class="calculator_predictor_name">Depth</span>
+				<div class="calculator_predictor_value">
+					<input type="number" value="" min="0" max="1000" id="lkd" name="lkd" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<span class="calculator_predictor_value_units" id="lkd_units" name="lkd_units"></span>
+				</div>
+			</div>
+			<div class="error" id="error_lkd">
+				<div class="error_triangle_container">
+					<span class="error_triangle_pre_box"></span>
+					<div class="error_triangle_box">
+						<span class="error_triangle_left_right_box"></span>
+						<span class="error_triangle"></span>
+						<span class="error_triangle_left_right_box"></span>
+					</div>
+				</div>
+				<div class="error_container">
+					<span class="error_pre_box"></span>
+					<span class="error_message" id="error_lkd_message"></span>
+				</div>
+			</div>
+		</div>
+		<div class="calculator_output">
+			<div class="calculator_output_buttons">
+				<button role="button" class="calculate" id="calculate" name="calculate" onClick="calculate()" disabled>Calculate</button>
+				<button role="button" class="clean" id="clean" name="clean" onClick="clean()">Clean</button>
+			</div>
+			<div id="calculator_output_results" class="calculator_output_results">
+				<div class="calculator_output_result">
+					<span class="calculator_output_result_value" id="result_gfr"></span>
+					<span class="calculator_output_result_descriptor">Current eGFR (CKD-EPI 2021)</span>
+				</div>
+				<div class="calculator_output_result">
+					<span class="calculator_output_result_value" id="result_tkv"></span>
+					<span class="calculator_output_result_descriptor">Total kidney volume (ellipsoid equation)</span>
+				</div>
+				<div class="calculator_output_result">
+					<span class="calculator_output_result_value" id="result_kgr"></span>
+					<span class="calculator_output_result_descriptor">Kidney growth rate</span>
+				</div>
+				<div class="calculator_output_result">
+					<span class="calculator_output_result_value" id="result_mcc"></span>
+					<span class="calculator_output_result_descriptor">Mayo Clinic Model category</span>
+				</div>
+				<div class="calculator_output_result">
+					<span class="calculator_output_result_value" id="result_risk"></span>
+					<span class="calculator_output_result_descriptor">Risk of ESRD (TFGe ≤15 ml/min/1.73m&sup2;) at 80 years of age</span>
+				</div>
+				<div class="calculator_output_result">
+					<span class="calculator_output_result_risk_container">
+						<span class="calculator_output_result_risk_box" id="calculator_output_result_risk_box_1"></span>
+						<span class="calculator_output_result_risk_box" id="calculator_output_result_risk_box_2"></span>
+						<span class="calculator_output_result_risk_box" id="calculator_output_result_risk_box_3"></span>
+						<span class="calculator_output_result_risk_box" id="calculator_output_result_risk_box_4"></span>
+						<span class="calculator_output_result_risk_box" id="calculator_output_result_risk_box_5"></span>
+					</span>
+					<span class="calculator_output_result_risk_container">
+						<span id="calculator_output_result_risk_pre_triangle"></span>
+						<span id="calculator_output_result_risk_triangle"></span>
+						<span id="calculator_output_result_risk_post_triangle"></span>
+					</span>
+					<span id="result_risk_category"></span>
+					<span class="calculator_output_result_descriptor">Risk category for ESRD at 80 years of age</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+	<div class="footer">
+		<div class="footer_authors">
+			<span class="footer_authors_word">Authors:</span>
+			<ui>
+				<li>Juan Jose Aguilar-Lugo-Gerez, MD</li>
+				<li>Pamela Rivero-Garcia, MD</li>
+			</ui>
+			<span class="footer_authors_institute">National Institute of Medical Sciences and Nutrition</span>
+		</div>
+		<div class="footer_contact">
+			<span class="footer_contact_word">Contact:</span>
+			<span>send an email to</span>
+			<span><a href="mailto: juan.aguilarg@incmnsz.mx" class="footer_contact_mail">juan.aguilarg@incmnsz.mx &#9993;</a></span>
+		</div>
+	</div>
+</footer>   
+	
+<div class="copyright">&copy; 2023. All rights reserved.</div>
+
+</body>
+
+</html>
