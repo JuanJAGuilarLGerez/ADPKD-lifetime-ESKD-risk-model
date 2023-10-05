@@ -55,6 +55,13 @@ var lkh_checked = "";
 var lkw_checked = "";
 var lkd_checked = "";
 
+document.addEventListener("DOMContentLoaded", function () {
+    const loaderContainer = document.querySelector(".loader-container");
+    loaderContainer.style.display = "none";
+    const content = document.querySelector(".content");
+    content.style.display = "block";
+});
+
 function adjust_body_height_and_hide_result() {
 	var header_fixed = document.getElementById("header_fixed").offsetHeight;
 	document.getElementById("section_introduction").style.marginTop=header_fixed+15;
@@ -166,12 +173,12 @@ function check_fields(){
 		creatinine_checked = 1;
 	}
 	
-	if (units_general == "international") {rkh_output = rkh_input}
-	if (units_general == "international") {rkw_output = rkw_input}
-	if (units_general == "international") {rkd_output = rkd_input}
-	if (units_general == "international") {lkh_output = lkh_input}
-	if (units_general == "international") {lkw_output = lkw_input}
-	if (units_general == "international") {lkd_output = lkd_input}
+	if (units_general == "international") {rkh_output = rkh_input/10}
+	if (units_general == "international") {rkw_output = rkw_input/10}
+	if (units_general == "international") {rkd_output = rkd_input/10}
+	if (units_general == "international") {lkh_output = lkh_input/10}
+	if (units_general == "international") {lkw_output = lkw_input/10}
+	if (units_general == "international") {lkd_output = lkd_input/10}
 	if (units_general == "imperial") {rkh_output = rkh_input * 2.54}
 	if (units_general == "imperial") {rkw_output = rkw_input * 2.54}
 	if (units_general == "imperial") {rkd_output = rkd_input * 2.54}
@@ -187,9 +194,9 @@ function check_fields(){
 		document.getElementById("error_rkh").style.display = "block";
 		document.getElementById("error_rkh_message").innerHTML = "Please select units of measurement";	
 	} else
-	if (units_general == "international" & (rkh_input < 6 || rkh_input > 30)) {		
+	if (units_general == "international" & (rkh_input < 60 || rkh_input > 300)) {		
 		document.getElementById("error_rkh").style.display = "block";
-		document.getElementById("error_rkh_message").innerHTML = "Kidney height must be 6-30 cm";	
+		document.getElementById("error_rkh_message").innerHTML = "Kidney height must be 60-300 mm";	
 	} else
 	if (units_general == "imperial" & (rkh_input < 2 || rkh_input > 12)) {		
 		document.getElementById("error_rkh").style.display = "block";
@@ -208,9 +215,9 @@ function check_fields(){
 		document.getElementById("error_rkw").style.display = "block";
 		document.getElementById("error_rkw_message").innerHTML = "Please select units of measurement";	
 	} else
-	if (units_general == "international" & (rkw_input < 4 || rkw_input > 20)) {		
+	if (units_general == "international" & (rkw_input < 40 || rkw_input > 200)) {		
 		document.getElementById("error_rkw").style.display = "block";
-		document.getElementById("error_rkw_message").innerHTML = "Kidney width must be 4-20 cm";	
+		document.getElementById("error_rkw_message").innerHTML = "Kidney width must be 40-200 mm";	
 	} else
 	if (units_general == "imperial" & (rkw_input < 1 || rkw_input > 8)) {		
 		document.getElementById("error_rkw").style.display = "block";
@@ -229,9 +236,9 @@ function check_fields(){
 		document.getElementById("error_rkd").style.display = "block";
 		document.getElementById("error_rkd_message").innerHTML = "Please select units of measurement";	
 	} else
-	if (units_general == "international" & (rkd_input < 4 || rkd_input > 20)) {		
+	if (units_general == "international" & (rkd_input < 40 || rkd_input > 200)) {		
 		document.getElementById("error_rkd").style.display = "block";
-		document.getElementById("error_rkd_message").innerHTML = "Kidney depth must be 4-20 cm";	
+		document.getElementById("error_rkd_message").innerHTML = "Kidney depth must be 40-200 mm";	
 	} else
 	if (units_general == "imperial" & (rkd_input < 1 || rkd_input > 8)) {		
 		document.getElementById("error_rkd").style.display = "block";
@@ -250,9 +257,9 @@ function check_fields(){
 		document.getElementById("error_lkh").style.display = "block";
 		document.getElementById("error_lkh_message").innerHTML = "Please select units of measurement";	
 	} else
-	if (units_general == "international" & (lkh_input < 6 || lkh_input > 30)) {		
+	if (units_general == "international" & (lkh_input < 60 || lkh_input > 300)) {		
 		document.getElementById("error_lkh").style.display = "block";
-		document.getElementById("error_lkh_message").innerHTML = "Kidney height must be 6-30 cm";	
+		document.getElementById("error_lkh_message").innerHTML = "Kidney height must be 60-300 mm";	
 	} else
 	if (units_general == "imperial" & (lkh_input < 2 || lkh_input > 12)) {		
 		document.getElementById("error_lkh").style.display = "block";
@@ -271,9 +278,9 @@ function check_fields(){
 		document.getElementById("error_lkw").style.display = "block";
 		document.getElementById("error_lkw_message").innerHTML = "Please select units of measurement";	
 	} else
-	if (units_general == "international" & (lkw_input < 4 || lkw_input > 20)) {		
+	if (units_general == "international" & (lkw_input < 40 || lkw_input > 200)) {		
 		document.getElementById("error_lkw").style.display = "block";
-		document.getElementById("error_lkw_message").innerHTML = "Kidney width must be 4-20 cm";	
+		document.getElementById("error_lkw_message").innerHTML = "Kidney width must be 40-200 mm";	
 	} else
 	if (units_general == "imperial" & (lkw_input < 1 || lkw_input > 8)) {		
 		document.getElementById("error_lkw").style.display = "block";
@@ -292,9 +299,9 @@ function check_fields(){
 		document.getElementById("error_lkd").style.display = "block";
 		document.getElementById("error_lkd_message").innerHTML = "Please select units of measurement";	
 	} else
-	if (units_general == "international" & (lkd_input < 4 || lkd_input > 20)) {		
+	if (units_general == "international" & (lkd_input < 40 || lkd_input > 200)) {		
 		document.getElementById("error_lkd").style.display = "block";
-		document.getElementById("error_lkd_message").innerHTML = "Kidney depth must be 4-20 cm";	
+		document.getElementById("error_lkd_message").innerHTML = "Kidney depth must be 40-200 mm";	
 	} else
 	if (units_general == "imperial" & (lkd_input < 1 || lkd_input > 8)) {		
 		document.getElementById("error_lkd").style.display = "block";
@@ -341,12 +348,18 @@ function units_international() {
 	document.getElementById("units_international").classList.add("button_grey_clicked");
 	document.getElementById("units_imperial").classList.remove("button_grey_clicked");
 	document.getElementById("height_international_units").innerHTML = "m";
-	document.getElementById("rkh_units").innerHTML = "cm";
-	document.getElementById("rkw_units").innerHTML = "cm";
-	document.getElementById("rkd_units").innerHTML = "cm";
-	document.getElementById("lkh_units").innerHTML = "cm";
-	document.getElementById("lkw_units").innerHTML = "cm";
-	document.getElementById("lkd_units").innerHTML = "cm";
+	document.getElementById("rkh_units").innerHTML = "mm";
+	document.getElementById("rkw_units").innerHTML = "mm";
+	document.getElementById("rkd_units").innerHTML = "mm";
+	document.getElementById("lkh_units").innerHTML = "mm";
+	document.getElementById("lkw_units").innerHTML = "mm";
+	document.getElementById("lkd_units").innerHTML = "mm";
+	document.getElementById("rkh_units").style.margin = "0 0 0 -2.7em";
+	document.getElementById("rkw_units").style.margin = "0 0 0 -2.7em";
+	document.getElementById("rkd_units").style.margin = "0 0 0 -2.7em";
+	document.getElementById("lkh_units").style.margin = "0 0 0 -2.7em";
+	document.getElementById("lkw_units").style.margin = "0 0 0 -2.7em";
+	document.getElementById("lkd_units").style.margin = "0 0 0 -2.7em";
 	document.getElementById("calculator_predictor_value_height_imperial").style.display = "none";
 	document.getElementById("calculator_predictor_value_height_international").style.display = "flex";
 	units_general = "international";
@@ -362,6 +375,12 @@ function units_imperial() {
 	document.getElementById("lkh_units").innerHTML = "in";
 	document.getElementById("lkw_units").innerHTML = "in";
 	document.getElementById("lkd_units").innerHTML = "in";
+	document.getElementById("rkh_units").style.margin = "0 0 0 -2em";
+	document.getElementById("rkw_units").style.margin = "0 0 0 -2em";
+	document.getElementById("rkd_units").style.margin = "0 0 0 -2em";
+	document.getElementById("lkh_units").style.margin = "0 0 0 -2em";
+	document.getElementById("lkw_units").style.margin = "0 0 0 -2em";
+	document.getElementById("lkd_units").style.margin = "0 0 0 -2em";
 	document.getElementById("calculator_predictor_value_height_international").style.display = "none";
 	document.getElementById("calculator_predictor_value_height_imperial").style.display = "flex";
 	units_general = "imperial";
@@ -410,12 +429,12 @@ function calculate() {
 	if (units_general == "imperial") {height_output = ((height_input_ft * 0.3048)+(height_input_in * 0.0254))}
 	if (units_creatinine == "mg") {creatinine_output = creatinine_input}
 	if (units_creatinine == "mmol") {creatinine_output = creatinine_input / 88.4017}
-	if (units_general == "international") {rkh_output = rkh_input}
-	if (units_general == "international") {rkw_output = rkw_input}
-	if (units_general == "international") {rkd_output = rkd_input}
-	if (units_general == "international") {lkh_output = lkh_input}
-	if (units_general == "international") {lkw_output = lkw_input}
-	if (units_general == "international") {lkd_output = lkd_input}
+	if (units_general == "international") {rkh_output = rkh_input/10}
+	if (units_general == "international") {rkw_output = rkw_input/10}
+	if (units_general == "international") {rkd_output = rkd_input/10}
+	if (units_general == "international") {lkh_output = lkh_input/10}
+	if (units_general == "international") {lkw_output = lkw_input/10}
+	if (units_general == "international") {lkd_output = lkd_input/10}
 	if (units_general == "imperial") {rkh_output = rkh_input * 2.54}
 	if (units_general == "imperial") {rkw_output = rkw_input * 2.54}
 	if (units_general == "imperial") {rkd_output = rkd_input * 2.54}
@@ -439,9 +458,9 @@ function calculate() {
 	tkv_increase_raw = ((((adj_tkv / 200) ** (1 / age)) ** (80 - age)) - 1) * 100
 	if (tkv_increase_raw < 0) {tkv_increase = 0} else {tkv_increase = tkv_increase_raw}
 	
-	gfr_2 = -98.822867 + (gfr_1 * 1.062850) + (tkv_increase * -1.339232) + (height_output * 55.219687)
+	gfr_2 = -10.790951 + (gfr_1 * 1.080464) + (tkv_increase * -0.972849)
 	
-	esrd = ((1 - (jStat.normal.cdf(gfr_2, 15, 16.04148917)))*100)
+	esrd = ((1 - (jStat.normal.cdf(gfr_2, 15, 12.967168)))*100)
 	
 	kgr_mcc_raw = (((adj_tkv / 150) ** (1 / age)) - 1) * 100
 	if (kgr_mcc_raw < 0) {kgr_mcc = 0} else {kgr_mcc = kgr_mcc_raw}
