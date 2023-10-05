@@ -38,7 +38,17 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 2;
+}
+
+@keyframes fadeOut {
+ 	0% {
+    opacity: 1;
+ }
+ 	100% {
+	opacity: 0;
+	display: none;
+}
 }
 
 #loader {
@@ -62,7 +72,9 @@ body{
 .header{
 	position: fixed;
 	width: 100%;
-	z-index: 2;
+	z-index: 3;
+	border-top: solid #CCCCCC 200px;
+	margin-top: -200px;
 }
 
 .header_title{
@@ -70,6 +82,7 @@ body{
 	padding: 0;
 	background-image:url(images/header.jpg);
 	background-size:cover;
+	border: 5em #7D4243;
 }
 
 .header_title ul{
@@ -132,7 +145,7 @@ section {
 	color:595959;
 	align-items:center;
 	font-weight:normal;
-	margin:0 2em 0em 2em;
+	margin:-185px 2em 0em 2em;
 	text-align: justify;
 	z-index: 1;
 }
