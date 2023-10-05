@@ -55,14 +55,10 @@ var lkh_checked = "";
 var lkw_checked = "";
 var lkd_checked = "";
 
-document.addEventListener("DOMContentLoaded", function () {
-    const loaderContainer = document.querySelector(".loader-container");
-    loaderContainer.style.display = "none";
-    const content = document.querySelector(".content");
-    content.style.display = "block";
-});
+window.onload = function () {
+    var loader_container = document.getElementById("loader_container");
+    loader_container.style.display = "none";
 
-function adjust_body_height_and_hide_result() {
 	var header_fixed = document.getElementById("header_fixed").offsetHeight;
 	document.getElementById("section_introduction").style.marginTop=header_fixed+15;
 	document.getElementById("calculator_output_results").style.display = "none";
