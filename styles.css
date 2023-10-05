@@ -34,7 +34,7 @@ body{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(0,0,0,0.82);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,12 +42,12 @@ body{
 }
 
 .loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
+    border: 8px solid #B3B3B3;
+	border-top: 8px solid #2384C6;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 2s linear infinite;
+    width: 4em;
+    height: 4em;
+    animation: spin .4s linear infinite;
 }
 
 @keyframes spin {
@@ -56,7 +56,7 @@ body{
 }
 
 .content {
-    display: none;
+    display: block;
 }
 
 .header{
