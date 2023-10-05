@@ -61,15 +61,16 @@ window.onload = function () {
 	
     var loader_container = document.getElementById("loader_container");
     loader_container.style.animation = "fadeOut .5s ease-in-out forwards";
-		
-	document.getElementById("calculator_output_results").style.display = "none";
-	document.getElementById("calculator_predictor_value_height_imperial").style.display = "none";	
 	
 	setInterval(function () {
     var loader_container = document.getElementById("loader_container");
     loader_container.style.display = "none";
 	}, 500)	
-};
+		
+	document.getElementById("calculator_output_results").style.display = "none";
+	document.getElementById("calculator_predictor_value_height_imperial").style.display = "none";	
+	
+}
 
 function check_fields(){
 	
