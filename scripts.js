@@ -56,13 +56,13 @@ var lkw_checked = "";
 var lkd_checked = "";
 
 window.onload = function () {
-    var loader_container = document.getElementById("loader_container");
-    loader_container.style.display = "none";
-
 	var header_fixed = document.getElementById("header_fixed").offsetHeight;
 	document.getElementById("section_introduction").style.marginTop=header_fixed+15;
 	document.getElementById("calculator_output_results").style.display = "none";
 	document.getElementById("calculator_predictor_value_height_imperial").style.display = "none";
+
+    var loader_container = document.getElementById("loader_container");
+    loader_container.style.display = "none";
 }
 
 function check_fields(){
