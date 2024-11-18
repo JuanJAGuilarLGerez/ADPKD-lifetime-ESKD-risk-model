@@ -41,7 +41,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }],
+    }, {
+      "src": "images/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+		   ],
   "lang": "en-US",
   "display": "standalone",
   "background_color": "#000000",

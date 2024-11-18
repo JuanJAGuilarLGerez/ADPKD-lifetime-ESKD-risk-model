@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     hideAllUI();
                 }
             }
-        }, 500); // Wait for the `beforeinstallprompt` event to fire before deciding
+        }, 200); // Wait for the `beforeinstallprompt` event to fire before deciding
 
         // Handle the install button click
         document.querySelector('.install_button').addEventListener('click', function () {
