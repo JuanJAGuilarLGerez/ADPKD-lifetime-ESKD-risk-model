@@ -93,19 +93,42 @@ function isAppInstalled() {
     return false; // The app is not installed
 }
 
-// Hide the install box if the app is already installed
-if (isAppInstalled()) {
-    document.querySelector('.section_install').style.display = 'none'; // Hide the install box
-} else {
-    // Show the install box for non-installed apps
-    window.addEventListener('beforeinstallprompt', function(e) {
-        e.preventDefault(); // Prevent the default browser prompt
-        deferredPrompt = e; // Save the event to trigger it later
-        document.querySelector('.section_install').style.display = 'flex'; // Show the install box
-    });
+// Function to show or hide install boxes
+function showInstallBox() {
+    document.querySelector('.section_install').style.display = 'flex';
+    document.querySelector('.ios_install_instructions').style.display = 'none'; // Hide iOS instructions by default
 }
 
-// Handle the button click to install the PWA
+function showIOSInstructions() {
+    document.querySelector('.ios_install_instructions').style.display = 'flex';
+    document.querySelector('.section_install').style.display = 'none'; // Hide default install prompt
+}
+
+function hideAllInstallBoxes() {
+    document.querySelector('.section_install').style.display = 'none';
+    document.querySelector('.ios_install_instructions').style.display = 'none';
+}
+
+// Hide the install box if the app is already installed
+if (isAppInstalled()) {
+    hideAllInstallBoxes(); // Hide all install boxes if the app is installed
+} else {
+    // Handle Android `beforeinstallprompt` event
+    if (!isIOS()) {
+        window.addEventListener('beforeinstallprompt', function(e) {
+            e.preventDefault(); // Prevent the default browser prompt
+            deferredPrompt = e; // Save the event to trigger it later
+            showInstallBox(); // Show the default install box
+        });
+    }
+
+    // Handle iOS custom installation instructions
+    if (isIOS() && !isAppInstalled()) {
+        showIOSInstructions(); // Show iOS-specific installation instructions
+    }
+}
+
+// Handle the button click to install the PWA for Android
 document.querySelector('.install_button').addEventListener('click', function() {
     if (deferredPrompt) {
         deferredPrompt.prompt(); // Show the installation prompt
@@ -116,23 +139,17 @@ document.querySelector('.install_button').addEventListener('click', function() {
                 console.log('PWA installation dismissed');
             }
             deferredPrompt = null; // Clear the deferred prompt
-            document.querySelector('.section_install').style.display = 'none'; // Hide the install box
+            hideAllInstallBoxes(); // Hide the install box
         });
     }
 });
 
-// Optional: Hide the install box if the app is already installed
+// Optional: Detect app installation event
 window.addEventListener('appinstalled', function() {
     console.log('PWA installed');
-    document.querySelector('.section_install').style.display = 'none'; // Hide the install box
+    hideAllInstallBoxes(); // Hide the install box
 });
 
-// For iOS, show custom prompt for installation
-if (isIOS() && !isAppInstalled()) {
-    // Show custom install prompt on iOS
-    document.querySelector('.section_install').style.display = 'flex';
-    document.querySelector('.install_button').innerText = 'Tap to add to home screen';
-}
 
 
 function check_fields(){
