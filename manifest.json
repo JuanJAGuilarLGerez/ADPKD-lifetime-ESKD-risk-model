@@ -16,6 +16,10 @@
       "sizes": "152x152",
       "type": "image/png"
     }, {
+      "src": "images/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }, {
       "src": "images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
@@ -27,6 +31,16 @@
       "src": "images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }, {
+      "src": "images/icon-512-foregroung.png",
+      "sizes": "512x512",
+      "type": "image/png"
+      "purpose": "maskable"
+    }, {
+      "src": "images/icon-512-background.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }],
   "lang": "en-US",
   "display": "standalone",
