@@ -71,7 +71,6 @@ window.onload = function () {
 	document.getElementById("calculator_predictor_value_height_imperial").style.display = "none";		
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     let deferredPrompt = null;
 
@@ -99,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function isIOS() {
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         return /iPhone|iPad|iPod/i.test(userAgent);
+    }
+
+    // Function to detect if the device is macOS
+    function isMacOS() {
+        return navigator.platform.includes('MacIntel') && !isIOS();
     }
 
     // Show or hide UI elements
@@ -146,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     hideAllUI();
                 }
             }
-        }, 1); // Wait for the `beforeinstallprompt` event to fire before deciding
+        }, 500); // Wait for the `beforeinstallprompt` event to fire before deciding
 
         // Handle the install button click
         document.querySelector('.install_button').addEventListener('click', function () {
@@ -167,7 +171,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
 
 
 function check_fields(){
