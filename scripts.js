@@ -55,6 +55,39 @@ var lkh_checked = "";
 var lkw_checked = "";
 var lkd_checked = "";
 
+let deferredPrompt; // Declare the deferredPrompt variable
+
+// Listen for the beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault(); // Prevent the default browser prompt
+    deferredPrompt = e; // Save the event to trigger it later
+    // Show the install box by changing display to flex
+    document.querySelector('.section_install').style.display = 'flex';
+});
+
+// Handle the button click to install the PWA
+document.querySelector('.install_button').addEventListener('click', async function() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt(); // Show the installation prompt
+        const choiceResult = await deferredPrompt.userChoice; // Wait for the user's choice
+        if (choiceResult.outcome === 'accepted') {
+            console.log('PWA installation accepted');
+        } else {
+            console.log('PWA installation dismissed');
+        }
+        deferredPrompt = null; // Clear the deferred prompt
+        // Hide the install box after the prompt is shown or dismissed
+        document.querySelector('.section_install').style.display = 'none';
+    }
+});
+
+// Optional: Hide the install box if the app is already installed
+window.addEventListener('appinstalled', function() {
+    console.log('PWA installed');
+    document.querySelector('.section_install').style.display = 'none'; // Hide the install box
+});
+
+
 window.onload = function () {
 	var header_fixed = document.getElementById("header_fixed").offsetHeight;
 	document.getElementById("section_introduction").style.marginTop=header_fixed-185;
