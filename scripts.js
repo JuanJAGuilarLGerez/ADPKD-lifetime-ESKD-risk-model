@@ -135,17 +135,18 @@ document.addEventListener('DOMContentLoaded', function () {
             showInstallBox(); // Show the install box
         });
 
-        // Delay to handle cases where `beforeinstallprompt` doesn’t fire
+        // Fallback to manual instructions if the `beforeinstallprompt` event is not fired
         setTimeout(function () {
             if (!beforeInstallSupported) {
-                if (isSafari() || (isMacOS() && !deferredPrompt)) {
+                if (isSafari() || isIOS() || isMacOS()) {
                     console.log('Manual installation required.');
                     showInstructions(); // Show instructions for unsupported platforms
                 } else {
-                    console.log('Waiting for the install event or browser support.');
+                    console.log('No install event supported, assuming unsupported browser.');
+                    showInstructions(); // Show fallback instructions for unknown browsers
                 }
             }
-        }, 200); // Adjust timeout as needed
+        }, 500); // Adjust timeout if necessary
     }
 
     // Handle the install button click
