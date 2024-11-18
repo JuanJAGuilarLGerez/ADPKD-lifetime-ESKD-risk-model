@@ -1,7 +1,7 @@
 {
   "id": "/",
   "name": "ADPKD lifetime ESKD risk model",
-  "short_name": "ADPKD ESKD model",
+  "short_name": "ADPKD",
   "start_url": "/ADPKD-lifetime-ESKD-risk-model/index.html",
   "icons": [{
     "src": "images/icon-128.png",
@@ -31,5 +31,5 @@
   "lang": "en-US",
   "display": "standalone",
   "background_color": "white",
-  "theme_color": "white"
+  "theme_color": "#0c1625"
 }
