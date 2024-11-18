@@ -198,6 +198,10 @@ section {
 	text-align:center;
 }
 
+.ios_install_instructions{
+	display: none;
+}
+
 .section_calculator {
 	display:flex;
 	flex-wrap: wrap;
@@ -682,7 +686,7 @@ footer {
 	justify-content:space-around;
 	align-items: baseline;
 	color:#000;
-	margin: .5em 0 0 0;
+	margin: .5em 2em 0 2em;
 }
 
 .how_to_box {
@@ -691,13 +695,14 @@ footer {
 	border-radius:.3em;
 	background-color:f8f8f8;
 	padding: 0em 1em 0em 1em;
-	margin:0 1em 0 1em;
+	margin:0 0 1em 0;
 }
 
 .how_to_axis_1{
 	padding: 0em;
 	text-align: center;
 	margin: 1em 0 1em 0;
+
 }
 
 .how_to_axis_2{
@@ -705,6 +710,7 @@ footer {
 	padding: 1em 0 1em 0;
 	text-align: center;
 	margin: 0;
+
 }
 
 .how_to_imageandtext{
