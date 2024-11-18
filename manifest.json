@@ -52,6 +52,6 @@
 		   ],
   "lang": "en-US",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "white",
   "theme_color": "#000000"
 }

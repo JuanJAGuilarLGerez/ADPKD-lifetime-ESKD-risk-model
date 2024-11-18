@@ -200,6 +200,20 @@ section {
 
 .installation_instructions{
 	display: none;
+	margin: 0em 2em 1em 2em;
+	width:50em;
+	border-radius:.3em;
+	padding:0 1em 0 1em;
+	color:#000000;
+	background-color:#eefff7;
+	border: solid #868686 .3mm;
+	text-align: center;
+	justify-content: center;
+}
+
+.export_icon {
+	width: 1em;
+	height: 1em;
 }
 
 .section_calculator {
