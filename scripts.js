@@ -73,73 +73,99 @@ window.onload = function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    var deferredPrompt = null;
+    let deferredPrompt = null;
 
-    // Function to detect if the app is already installed
+    // Function to check if the app is already installed
     function isAppInstalled() {
-        // Check for Android standalone mode
+        // Check if running in standalone mode (Android and iOS)
         if (window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('App is running in standalone mode.');
+            console.log('App is running in standalone mode (Android/desktop).');
             return true;
         }
-        // Check for iOS standalone mode
         if (navigator.standalone) {
-            console.log('App is running in standalone mode on iOS.');
+            console.log('App is running in standalone mode (iOS).');
             return true;
         }
-        return false;
+        return false; // App is not installed
     }
 
-    // Show or hide installation sections
+    // Function to detect if the browser is Safari
+    function isSafari() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return userAgent.includes('safari') && !userAgent.includes('chrome'); // Safari but not Chrome
+    }
+
+    // Function to detect if the device is iOS
+    function isIOS() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        return /iPhone|iPad|iPod/i.test(userAgent);
+    }
+
+    // Show or hide UI elements
     function showInstallButton() {
         document.querySelector('.section_install').style.display = 'flex';
+        document.querySelector('.installation_instructions').style.display = 'none';
         console.log('Install button is displayed.');
     }
 
-    function hideInstallButton() {
+    function showManualInstructions() {
         document.querySelector('.section_install').style.display = 'none';
-        console.log('Install button is hidden.');
+        document.querySelector('.installation_instructions').style.display = 'flex';
+        console.log('Manual installation instructions are displayed.');
     }
 
-    // Main logic
+    function hideAllUI() {
+        document.querySelector('.section_install').style.display = 'none';
+        document.querySelector('.installation_instructions').style.display = 'none';
+        console.log('All UI elements are hidden.');
+    }
+
+    // Main logic to handle installation flows
     if (isAppInstalled()) {
-        // If the app is already installed, hide the button
-        hideInstallButton();
+        // If the app is already installed, hide everything
+        hideAllUI();
     } else {
+        let installable = false;
+
         // Listen for the `beforeinstallprompt` event
         window.addEventListener('beforeinstallprompt', function (e) {
-            e.preventDefault(); // Prevent the default prompt
+            e.preventDefault(); // Prevent the default browser prompt
             deferredPrompt = e; // Save the event for later use
-            console.log('beforeinstallprompt event fired. Install button can be displayed.');
-            showInstallButton();
+            installable = true; // Mark as installable
+            showInstallButton(); // Show the install button
         });
 
-        // Fallback: If the `beforeinstallprompt` event doesn't fire
+        // Fallback for unsupported browsers or devices
         setTimeout(function () {
-            if (!deferredPrompt) {
-                console.log('beforeinstallprompt did not fire. Fallback logic may be needed.');
-                hideInstallButton(); // Hide button if unsupported
-            }
-        }, 500);
-    }
-
-    // Handle the install button click
-    document.querySelector('.install_button').addEventListener('click', function () {
-        if (deferredPrompt) {
-            deferredPrompt.prompt(); // Show the install prompt
-            deferredPrompt.userChoice.then(function (choiceResult) {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('PWA installation accepted.');
+            if (!installable) {
+                // If the app is not installable via `beforeinstallprompt`, show manual instructions
+                if (isSafari() || isIOS() || isMacOS()) {
+                    showManualInstructions();
                 } else {
-                    console.log('PWA installation dismissed.');
+                    console.log('Device or browser is not supported for installation.');
+                    hideAllUI();
                 }
-                deferredPrompt = null; // Clear the deferredPrompt
-                hideInstallButton(); // Hide the button after a choice is made
-            });
-        } else {
-            console.log('Install button clicked, but no deferred prompt is available.');
-        }
-    });
+            }
+        }, 500); // Wait for the `beforeinstallprompt` event to fire before deciding
+
+        // Handle the install button click
+        document.querySelector('.install_button').addEventListener('click', function () {
+            if (deferredPrompt) {
+                deferredPrompt.prompt(); // Show the installation prompt
+                deferredPrompt.userChoice.then(function (choiceResult) {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('PWA installation accepted.');
+                    } else {
+                        console.log('PWA installation dismissed.');
+                    }
+                    deferredPrompt = null; // Clear the deferredPrompt
+                    hideAllUI(); // Hide everything after a choice is made
+                });
+            } else {
+                console.log('Install button clicked, but no deferred prompt is available.');
+            }
+        });
+    }
 });
 
 
