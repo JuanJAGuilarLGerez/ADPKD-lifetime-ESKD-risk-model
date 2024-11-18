@@ -74,12 +74,18 @@ window.onload = function () {
 document.addEventListener('DOMContentLoaded', function () {
     var deferredPrompt;
 
-    // Function to detect iOS devices, excluding macOS
+    // Function to detect iOS devices
     function isIOS() {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        return /iPhone|iPad|iPod/i.test(userAgent) && !window.navigator.platform.includes('MacIntel');
+        return /iPhone|iPad|iPod/i.test(userAgent);
     }
 
+    // Function to detect macOS
+    function isMacOS() {
+        return navigator.platform.includes('MacIntel') && !isIOS();
+    }
+
+    // Function to check if the app is already installed
     function isAppInstalled() {
         if (window.matchMedia('(display-mode: standalone)').matches) {
             return true;
@@ -92,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
+    // Show or hide install prompts
     function showInstallBox() {
         document.querySelector('.section_install').style.display = 'flex';
         document.querySelector('.ios_install_instructions').style.display = 'none';
@@ -107,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.ios_install_instructions').style.display = 'none';
     }
 
+    // Determine what to show based on the platform and installation status
     if (isAppInstalled()) {
         hideAllInstallBoxes();
     } else {
@@ -114,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('iOS detected. Showing iOS instructions.');
             showIOSInstructions();
         } else {
-            console.log('Non-iOS device. Handling Android install.');
+            console.log('Non-iOS device. Handling installation.');
             window.addEventListener('beforeinstallprompt', function (e) {
                 e.preventDefault();
                 deferredPrompt = e;
@@ -123,11 +131,31 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Handle the install button click for macOS and Android
+    document.querySelector('.install_button').addEventListener('click', function () {
+        if (deferredPrompt) {
+            deferredPrompt.prompt(); // Show the installation prompt
+            deferredPrompt.userChoice.then(function (choiceResult) {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('PWA installation accepted');
+                } else {
+                    console.log('PWA installation dismissed');
+                }
+                deferredPrompt = null;
+                hideAllInstallBoxes();
+            });
+        } else if (isMacOS()) {
+            alert('To install the app, use Safari and open this page, then click the Share button and select "Add to Dock".');
+        }
+    });
+
+    // Detect app installation
     window.addEventListener('appinstalled', function () {
         console.log('PWA installed');
         hideAllInstallBoxes();
     });
 });
+
 
 
 
