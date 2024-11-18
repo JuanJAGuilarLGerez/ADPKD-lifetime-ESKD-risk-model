@@ -30,6 +30,6 @@
     }],
   "lang": "en-US",
   "display": "standalone",
-  "background_color": "white",
-  "theme_color": "#1e1e1e"
+  "background_color": "#000000",
+  "theme_color": "#000000"
 }
