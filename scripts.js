@@ -74,6 +74,12 @@ window.onload = function () {
 document.addEventListener('DOMContentLoaded', function () {
     var deferredPrompt;
 
+    // Function to detect Safari
+    function isSafari() {
+        var userAgent = navigator.userAgent.toLowerCase();
+        return userAgent.includes('safari') && !userAgent.includes('chrome'); // Safari but not Chrome
+    }
+
     // Function to detect iOS devices
     function isIOS() {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -88,50 +94,49 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to check if the app is already installed
     function isAppInstalled() {
         if (window.matchMedia('(display-mode: standalone)').matches) {
-            return true;
+            return true; // App is installed in standalone mode (Android, macOS)
         }
-
         if (isIOS() && window.navigator.standalone) {
-            return true;
+            return true; // App is installed in standalone mode (iOS)
         }
-
-        return false;
+        return false; // App is not installed
     }
 
-    // Show or hide install prompts
+    // Show or hide installation sections
     function showInstallBox() {
         document.querySelector('.section_install').style.display = 'flex';
-        document.querySelector('.ios_install_instructions').style.display = 'none';
+        document.querySelector('.installation_instructions').style.display = 'none';
     }
 
-    function showIOSInstructions() {
-        document.querySelector('.ios_install_instructions').style.display = 'flex';
+    function showInstructions() {
         document.querySelector('.section_install').style.display = 'none';
+        document.querySelector('.installation_instructions').style.display = 'flex';
     }
 
     function hideAllInstallBoxes() {
         document.querySelector('.section_install').style.display = 'none';
-        document.querySelector('.ios_install_instructions').style.display = 'none';
+        document.querySelector('.installation_instructions').style.display = 'none';
     }
 
-    // Determine what to show based on the platform and installation status
+    // Logic to handle installation prompt
     if (isAppInstalled()) {
-        hideAllInstallBoxes();
+        hideAllInstallBoxes(); // Hide everything if the app is installed
     } else {
-        if (isIOS()) {
-            console.log('iOS detected. Showing iOS instructions.');
-            showIOSInstructions();
-        } else {
-            console.log('Non-iOS device. Handling installation.');
-            window.addEventListener('beforeinstallprompt', function (e) {
-                e.preventDefault();
-                deferredPrompt = e;
-                showInstallBox();
-            });
+        // If the `beforeinstallprompt` event is supported, handle it
+        window.addEventListener('beforeinstallprompt', function (e) {
+            e.preventDefault(); // Prevent the default browser prompt
+            deferredPrompt = e; // Save the event to trigger it later
+            showInstallBox(); // Show the install box
+        });
+
+        // Show manual instructions if the `beforeinstallprompt` event isn't supported (e.g., Safari)
+        if (!deferredPrompt && (isSafari() || isIOS() || isMacOS())) {
+            console.log('Manual installation required.');
+            showInstructions();
         }
     }
 
-    // Handle the install button click for macOS and Android
+    // Handle the install button click for devices that support `beforeinstallprompt`
     document.querySelector('.install_button').addEventListener('click', function () {
         if (deferredPrompt) {
             deferredPrompt.prompt(); // Show the installation prompt
@@ -141,22 +146,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     console.log('PWA installation dismissed');
                 }
-                deferredPrompt = null;
-                hideAllInstallBoxes();
+                deferredPrompt = null; // Clear the deferred prompt
+                hideAllInstallBoxes(); // Hide everything after the user makes a choice
             });
-        } else if (isMacOS()) {
-            alert('To install the app, use Safari and open this page, then click the Share button and select "Add to Dock".');
         }
     });
 
-    // Detect app installation
-    window.addEventListener('appinstalled', function () {
-        console.log('PWA installed');
-        hideAllInstallBoxes();
-    });
+    // For unsupported devices (iOS, macOS Safari, etc.), show manual instructions
+    if (isSafari() || isIOS() || isMacOS()) {
+        console.log('Device requires manual installation.');
+        showInstructions();
+    }
 });
-
-
 
 
 
