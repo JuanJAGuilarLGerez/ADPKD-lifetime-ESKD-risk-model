@@ -73,17 +73,35 @@ window.onload = function () {
 
 var deferredPrompt; // Declare the deferredPrompt variable
 
-// Function to detect iOS device
+// Function to detect iOS devices
 function isIOS() {
     return /iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
-// Handle beforeinstallprompt event for non-iOS
-if (!isIOS()) {
+// Function to check if the app is already installed
+function isAppInstalled() {
+    // For Android, check if it's in standalone mode (PWA installed)
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        return true; // App is installed on Android
+    }
+    
+    // For iOS, check if the app is running in standalone mode
+    if (isIOS() && window.navigator.standalone) {
+        return true; // App is installed on iOS
+    }
+    
+    return false; // The app is not installed
+}
+
+// Hide the install box if the app is already installed
+if (isAppInstalled()) {
+    document.querySelector('.section_install').style.display = 'none'; // Hide the install box
+} else {
+    // Show the install box for non-installed apps
     window.addEventListener('beforeinstallprompt', function(e) {
         e.preventDefault(); // Prevent the default browser prompt
         deferredPrompt = e; // Save the event to trigger it later
-        document.querySelector('.section_install').style.display = 'flex'; // Show install box
+        document.querySelector('.section_install').style.display = 'flex'; // Show the install box
     });
 }
 
@@ -110,7 +128,7 @@ window.addEventListener('appinstalled', function() {
 });
 
 // For iOS, show custom prompt for installation
-if (isIOS()) {
+if (isIOS() && !isAppInstalled()) {
     // Show custom install prompt on iOS
     document.querySelector('.section_install').style.display = 'flex';
     document.querySelector('.install_button').innerText = 'Tap to add to home screen';
