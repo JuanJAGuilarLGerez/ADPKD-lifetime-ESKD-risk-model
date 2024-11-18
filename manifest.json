@@ -1,6 +1,7 @@
 {
-  "name": "ADPKD lifetime ESRD risk model",
-  "short_name": "ADPKD ESRD model",
+  "name": "ADPKD lifetime ESKD risk model",
+  "short_name": "ADPKD ESKD model",
+  "start_url": "/index.html",
   "icons": [{
     "src": "images/icon-128.png",
       "sizes": "128x128",
