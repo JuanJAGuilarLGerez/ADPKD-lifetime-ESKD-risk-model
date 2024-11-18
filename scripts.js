@@ -55,7 +55,7 @@ var lkh_checked = "";
 var lkw_checked = "";
 var lkd_checked = "";
 
-let deferredPrompt; // Declare the deferredPrompt variable
+var deferredPrompt; // Declare the deferredPrompt variable
 
 // Listen for the beforeinstallprompt event
 window.addEventListener('beforeinstallprompt', function(e) {
@@ -66,18 +66,19 @@ window.addEventListener('beforeinstallprompt', function(e) {
 });
 
 // Handle the button click to install the PWA
-document.querySelector('.install_button').addEventListener('click', async function() {
+document.querySelector('.install_button').addEventListener('click', function() {
     if (deferredPrompt) {
         deferredPrompt.prompt(); // Show the installation prompt
-        const choiceResult = await deferredPrompt.userChoice; // Wait for the user's choice
-        if (choiceResult.outcome === 'accepted') {
-            console.log('PWA installation accepted');
-        } else {
-            console.log('PWA installation dismissed');
-        }
-        deferredPrompt = null; // Clear the deferred prompt
-        // Hide the install box after the prompt is shown or dismissed
-        document.querySelector('.section_install').style.display = 'none';
+        deferredPrompt.userChoice.then(function(choiceResult) { // Use Promise syntax instead of async/await
+            if (choiceResult.outcome === 'accepted') {
+                console.log('PWA installation accepted');
+            } else {
+                console.log('PWA installation dismissed');
+            }
+            deferredPrompt = null; // Clear the deferred prompt
+            // Hide the install box after the prompt is shown or dismissed
+            document.querySelector('.section_install').style.display = 'none';
+        });
     }
 });
 
