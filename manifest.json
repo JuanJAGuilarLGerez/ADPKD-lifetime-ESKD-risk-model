@@ -34,7 +34,7 @@
     }, {
       "src": "images/icon-512-foregroung.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
       "purpose": "maskable"
     }, {
       "src": "images/icon-512-background.png",
