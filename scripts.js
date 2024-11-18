@@ -130,17 +130,22 @@ document.addEventListener('DOMContentLoaded', function () {
         hideAllInstallBoxes();
     } else {
         // If the `beforeinstallprompt` event is supported, handle it
+        var beforeInstallSupported = false;
         window.addEventListener('beforeinstallprompt', function (e) {
             e.preventDefault(); // Prevent the default browser prompt
             deferredPrompt = e; // Save the event to trigger it later
+            beforeInstallSupported = true; // Indicate that beforeinstallprompt is supported
             showInstallBox(); // Show the install box
         });
 
-        // If manual instructions are needed (e.g., Safari or unsupported platforms)
-        if (!deferredPrompt && (isSafari() || isIOS() || isMacOS())) {
-            console.log('Manual installation required.');
-            showInstructions();
-        }
+        // Delay to ensure the `beforeinstallprompt` event has time to fire
+        setTimeout(function () {
+            // If `beforeinstallprompt` is not supported and we are on Safari (iOS or macOS), show instructions
+            if (!beforeInstallSupported && (isSafari() || isIOS())) {
+                console.log('Manual installation required.');
+                showInstructions();
+            }
+        }, 100); // Adjust timeout if necessary
     }
 
     // Handle the install button click for devices that support `beforeinstallprompt`
@@ -158,14 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
-
-    // Fallback for Safari or unsupported platforms
-    if (isSafari() || isIOS() || isMacOS()) {
-        console.log('Checking for manual installation instructions.');
-        if (!isAppInstalled()) {
-            showInstructions(); // Show manual installation instructions only if not installed
-        }
-    }
 });
 
 
