@@ -93,12 +93,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to check if the app is already installed
     function isAppInstalled() {
+        // For standalone mode on Android, iOS, or desktop
         if (window.matchMedia('(display-mode: standalone)').matches) {
-            return true; // App is installed in standalone mode (Android, macOS)
+            console.log('App is running in standalone mode.');
+            return true;
         }
+
+        // For standalone mode on iOS
         if (isIOS() && window.navigator.standalone) {
-            return true; // App is installed in standalone mode (iOS)
+            console.log('App is running in standalone mode on iOS.');
+            return true;
         }
+
         return false; // App is not installed
     }
 
@@ -118,9 +124,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.installation_instructions').style.display = 'none';
     }
 
-    // Logic to handle installation prompt
+    // Main logic
     if (isAppInstalled()) {
-        hideAllInstallBoxes(); // Hide everything if the app is installed
+        // If the app is already installed, hide all prompts
+        hideAllInstallBoxes();
     } else {
         // If the `beforeinstallprompt` event is supported, handle it
         window.addEventListener('beforeinstallprompt', function (e) {
@@ -129,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showInstallBox(); // Show the install box
         });
 
-        // Show manual instructions if the `beforeinstallprompt` event isn't supported (e.g., Safari)
+        // If manual instructions are needed (e.g., Safari or unsupported platforms)
         if (!deferredPrompt && (isSafari() || isIOS() || isMacOS())) {
             console.log('Manual installation required.');
             showInstructions();
@@ -142,9 +149,9 @@ document.addEventListener('DOMContentLoaded', function () {
             deferredPrompt.prompt(); // Show the installation prompt
             deferredPrompt.userChoice.then(function (choiceResult) {
                 if (choiceResult.outcome === 'accepted') {
-                    console.log('PWA installation accepted');
+                    console.log('PWA installation accepted.');
                 } else {
-                    console.log('PWA installation dismissed');
+                    console.log('PWA installation dismissed.');
                 }
                 deferredPrompt = null; // Clear the deferred prompt
                 hideAllInstallBoxes(); // Hide everything after the user makes a choice
@@ -152,13 +159,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // For unsupported devices (iOS, macOS Safari, etc.), show manual instructions
+    // Fallback for Safari or unsupported platforms
     if (isSafari() || isIOS() || isMacOS()) {
-        console.log('Device requires manual installation.');
-        showInstructions();
+        console.log('Checking for manual installation instructions.');
+        if (!isAppInstalled()) {
+            showInstructions(); // Show manual installation instructions only if not installed
+        }
     }
 });
-
 
 
 function check_fields(){
