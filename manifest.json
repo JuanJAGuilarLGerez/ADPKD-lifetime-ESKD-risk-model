@@ -39,15 +39,10 @@
       "type": "image/png",
 		"purpose": "any"
     }, {
-      "src": "images/icon-512-foreground.png",
+      "src": "images/icon-512-android.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
-    }, {
-      "src": "images/icon-512-background.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
     }, {
       "src": "images/icon-1024.png",
       "sizes": "1024x1024",
