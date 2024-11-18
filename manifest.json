@@ -32,7 +32,7 @@
       "sizes": "512x512",
       "type": "image/png"
     }, {
-      "src": "images/icon-512-foregroung.png",
+      "src": "images/icon-512-foreground.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
