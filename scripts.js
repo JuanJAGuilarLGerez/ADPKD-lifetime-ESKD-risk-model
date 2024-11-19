@@ -77,29 +77,27 @@ window.onload = function () {
 document.addEventListener('DOMContentLoaded', function () {
     let deferredPrompt = null;
 
-    // Function to check if the app is already installed
 	function isAppInstalled() {
-    // Check for standalone mode (Android/desktop)
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        console.log('App is running in standalone mode (Android/desktop).');
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    const isIOSStandalone = 'standalone' in navigator && navigator.standalone;
+
+    if (isStandalone || isIOSStandalone) {
+        console.log('App is running in standalone mode.');
         return true;
     }
 
-    // Check for standalone mode (iOS)
-    if ('standalone' in navigator && navigator.standalone) {
-        console.log('App is running in standalone mode (iOS).');
-        return true;
-    }
-
-    // Additional check for macOS-specific environments
+    // Additional check for macOS fullscreen mode
     const userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.includes('macintosh') && window.navigator.platform === 'MacIntel') {
-        console.log('Running on macOS. PWA check may not be reliable.');
-        return false; // macOS browsers do not reliably indicate PWA state
+    const isMacOS = userAgent.includes('macintosh') && window.navigator.platform === 'MacIntel';
+
+    if (isMacOS && document.fullscreenElement) {
+        console.log('App is running in fullscreen mode on macOS. Checking further...');
+        // Optionally add logic to verify that it's a PWA (e.g., based on stored state or custom headers)
+        return true;
     }
 
-    return false; // App is not installed
-	}
+    return false; // Not installed or not running in standalone/fullscreen
+}
 
     // Function to detect if the browser is Safari
     function isSafari() {
