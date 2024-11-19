@@ -282,7 +282,7 @@ function check_fields(){
 	} else
 	if (gfr_1 <= 15) {
 		document.getElementById("error_creatinine").style.display = "block";
-		document.getElementById("error_creatinine_message").innerHTML = "Patient already in ESRD";
+		document.getElementById("error_creatinine_message").innerHTML = "Patient already in ESKD";
 	} else {
 		document.getElementById("error_creatinine").style.display = "none";
 		document.getElementById("error_creatinine_message").innerHTML = "";
