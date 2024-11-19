@@ -78,18 +78,28 @@ document.addEventListener('DOMContentLoaded', function () {
     let deferredPrompt = null;
 
     // Function to check if the app is already installed
-    function isAppInstalled() {
-        // Check if running in standalone mode (Android and iOS)
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('App is running in standalone mode (Android/desktop).');
-            return true;
-        }
-        if (navigator.standalone) {
-            console.log('App is running in standalone mode (iOS).');
-            return true;
-        }
-        return false; // App is not installed
+	function isAppInstalled() {
+    // Check for standalone mode (Android/desktop)
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('App is running in standalone mode (Android/desktop).');
+        return true;
     }
+
+    // Check for standalone mode (iOS)
+    if ('standalone' in navigator && navigator.standalone) {
+        console.log('App is running in standalone mode (iOS).');
+        return true;
+    }
+
+    // Additional check for macOS-specific environments
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (userAgent.includes('macintosh') && window.navigator.platform === 'MacIntel') {
+        console.log('Running on macOS. PWA check may not be reliable.');
+        return false; // macOS browsers do not reliably indicate PWA state
+    }
+
+    return false; // App is not installed
+	}
 
     // Function to detect if the browser is Safari
     function isSafari() {
@@ -550,6 +560,7 @@ function enter_measurements() {
 	document.getElementById("calculator_input_measurements").style.display = "block";
 	document.getElementById("calculator_input_tkv").style.display = "none";
 	tkv_or_measurements = "measurements";
+
 }
 
 function calculate() {
@@ -654,6 +665,13 @@ function calculate() {
 	if (esrd >= 65 & esrd < 95) {document.getElementById("calculator_output_result_risk_box_4").style.borderWidth = "thick"}
 	if (esrd >= 95 & esrd < 100) {document.getElementById("calculator_output_result_risk_box_5").style.borderWidth = "thick"}
 	if (esrd == 100) {document.getElementById("calculator_output_result_risk_box_5").style.borderRightWidth = "thick"}
+	
+	if (tkv_or_measurements == "tkv") {
+	document.getElementById("result_tkv_message").innerHTML = "Total kidney volume"
+	} else if (tkv_or_measurements == "measurements") {
+	document.getElementById("result_tkv_message").innerHTML = "Total kidney volume (ellipsoid equation)"
+	}	
+	
 }
 
 function clean() {

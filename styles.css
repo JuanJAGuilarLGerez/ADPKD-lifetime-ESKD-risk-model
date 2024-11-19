@@ -389,10 +389,17 @@ section {
 	margin: 0 0 0 -.2em;
 }
 
-.calculator_input_kidney_side{
-	padding: .6em;
+.calculator_input_kidney_left{
+	padding: 1em .6em .6em .6em;
 	border-top: solid #CCCCCC .3mm;
 	margin: 1em 0 0 0;
+	text-align: center;
+	font-size: 1em;
+}
+
+.calculator_input_kidney_right{
+	padding: .6em;
+	margin: .5em 0 0 0;
 	text-align: center;
 	font-size: 1em;
 }
