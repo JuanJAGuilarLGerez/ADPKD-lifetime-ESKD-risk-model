@@ -146,135 +146,169 @@
 					<span class="error_message" id="error_creatinine_message"></span>
 				</div>
 			</div>
-			<div class="calculator_input_kidney_side">Right kidney</div>
-			<div class="calculator_predictor">
-				<span class="calculator_predictor_name">Height</span>
-				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="1000" id="rkh" name="rkh" oninput="check_fields()" onkeydown="pressed_key(event)">
-					<span class="calculator_predictor_value_units" id="rkh_units" name="rkh_units"></span>
-				</div>
+			
+			
+			<div class="calculator_input_tkv_or_measurements">
+				<button role="button" class="enter_measurements button_grey" id="enter_measurements" name="enter_measurements" onClick="enter_measurements(); check_fields()">Kidney measurements</button>
+				<button role="button" class="enter_tkv button_grey" id="enter_tkv" name="enter_tkv" onClick="enter_tkv(); check_fields()">Total kidney volume</button>
 			</div>
-			<div class="error" id="error_rkh">
-				<div class="error_triangle_container">
-					<span class="error_triangle_pre_box"></span>
-					<div class="error_triangle_box">
-						<span class="error_triangle_left_right_box"></span>
-						<span class="error_triangle"></span>
-						<span class="error_triangle_left_right_box"></span>
+			<div id="calculator_input_tkv">
+				<div class="calculator_predictor">
+					<span class="calculator_predictor_name">Total kidney volume</span>
+					<div class="calculator_predictor_value">
+						<input type="number" value="" min="150" max="6000" id="tkv" name="tkv" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<span class="calculator_predictor_value_units">ml</span>
+					</div>		
+				</div>
+				<div class="error" id="error_tkv">
+					<div class="error_triangle_container">
+						<span class="error_triangle_pre_box"></span>
+						<div class="error_triangle_box">
+							<span class="error_triangle_left_right_box"></span>
+							<span class="error_triangle"></span>
+							<span class="error_triangle_left_right_box"></span>
+						</div>
+					</div>
+					<div class="error_container">
+						<span class="error_pre_box"></span>
+						<span class="error_message" id="error_tkv_message"></span>
 					</div>
 				</div>
-				<div class="error_container">
-					<span class="error_pre_box"></span>
-					<span class="error_message" id="error_rkh_message"></span>
-				</div>
 			</div>
-			<div class="calculator_predictor">
-				<span class="calculator_predictor_name">Width</span>
-				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="1000" id="rkw" name="rkw" oninput="check_fields()" onkeydown="pressed_key(event)">
-					<span class="calculator_predictor_value_units" id="rkw_units" name="rkw_units"></span>
-				</div>
-			</div>
-			<div class="error" id="error_rkw">
-				<div class="error_triangle_container">
-					<span class="error_triangle_pre_box"></span>
-					<div class="error_triangle_box">
-						<span class="error_triangle_left_right_box"></span>
-						<span class="error_triangle"></span>
-						<span class="error_triangle_left_right_box"></span>
+			
+
+			<div class="calculator_input_measurements" id="calculator_input_measurements">
+				<div class="calculator_input_kidney_side">Right kidney</div>
+				<div class="calculator_predictor">
+					<span class="calculator_predictor_name">Height</span>
+					<div class="calculator_predictor_value">
+						<input type="number" value="" min="0" max="1000" id="rkh" name="rkh" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<span class="calculator_predictor_value_units" id="rkh_units" name="rkh_units"></span>
 					</div>
 				</div>
-				<div class="error_container">
-					<span class="error_pre_box"></span>
-					<span class="error_message" id="error_rkw_message"></span>
-				</div>
-			</div>
-			<div class="calculator_predictor">
-				<span class="calculator_predictor_name">Depth</span>
-				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="1000" id="rkd" name="rkd" oninput="check_fields()" onkeydown="pressed_key(event)">
-					<span class="calculator_predictor_value_units" id="rkd_units" name="rkd_units"></span>
-				</div>
-			</div>
-			<div class="error" id="error_rkd">
-				<div class="error_triangle_container">
-					<span class="error_triangle_pre_box"></span>
-					<div class="error_triangle_box">
-						<span class="error_triangle_left_right_box"></span>
-						<span class="error_triangle"></span>
-						<span class="error_triangle_left_right_box"></span>
+				<div class="error" id="error_rkh">
+					<div class="error_triangle_container">
+						<span class="error_triangle_pre_box"></span>
+						<div class="error_triangle_box">
+							<span class="error_triangle_left_right_box"></span>
+							<span class="error_triangle"></span>
+							<span class="error_triangle_left_right_box"></span>
+						</div>
+					</div>
+					<div class="error_container">
+						<span class="error_pre_box"></span>
+						<span class="error_message" id="error_rkh_message"></span>
 					</div>
 				</div>
-				<div class="error_container">
-					<span class="error_pre_box"></span>
-					<span class="error_message" id="error_rkd_message"></span>
-				</div>
-			</div>
-			<div class="calculator_input_kidney_side">Left kidney</div>
-			<div class="calculator_predictor">
-				<span class="calculator_predictor_name">Height</span>
-				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="1000" id="lkh" name="lkh" oninput="check_fields()" onkeydown="pressed_key(event)">
-					<span class="calculator_predictor_value_units" id="lkh_units" name="lkh_units"></span>
-				</div>
-			</div>
-			<div class="error" id="error_lkh">
-				<div class="error_triangle_container">
-					<span class="error_triangle_pre_box"></span>
-					<div class="error_triangle_box">
-						<span class="error_triangle_left_right_box"></span>
-						<span class="error_triangle"></span>
-						<span class="error_triangle_left_right_box"></span>
+				<div class="calculator_predictor">
+					<span class="calculator_predictor_name">Width</span>
+					<div class="calculator_predictor_value">
+						<input type="number" value="" min="0" max="1000" id="rkw" name="rkw" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<span class="calculator_predictor_value_units" id="rkw_units" name="rkw_units"></span>
 					</div>
 				</div>
-				<div class="error_container">
-					<span class="error_pre_box"></span>
-					<span class="error_message" id="error_lkh_message"></span>
-				</div>
-			</div>
-			<div class="calculator_predictor">
-				<span class="calculator_predictor_name">Width</span>
-				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="1000" id="lkw" name="lkw" oninput="check_fields()" onkeydown="pressed_key(event)">
-					<span class="calculator_predictor_value_units" id="lkw_units" name="lkw_units"></span>
-				</div>
-			</div>
-			<div class="error" id="error_lkw">
-				<div class="error_triangle_container">
-					<span class="error_triangle_pre_box"></span>
-					<div class="error_triangle_box">
-						<span class="error_triangle_left_right_box"></span>
-						<span class="error_triangle"></span>
-						<span class="error_triangle_left_right_box"></span>
+				<div class="error" id="error_rkw">
+					<div class="error_triangle_container">
+						<span class="error_triangle_pre_box"></span>
+						<div class="error_triangle_box">
+							<span class="error_triangle_left_right_box"></span>
+							<span class="error_triangle"></span>
+							<span class="error_triangle_left_right_box"></span>
+						</div>
+					</div>
+					<div class="error_container">
+						<span class="error_pre_box"></span>
+						<span class="error_message" id="error_rkw_message"></span>
 					</div>
 				</div>
-				<div class="error_container">
-					<span class="error_pre_box"></span>
-					<span class="error_message" id="error_lkw_message"></span>
-				</div>
-			</div>
-			<div class="calculator_predictor">
-				<span class="calculator_predictor_name">Depth</span>
-				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="1000" id="lkd" name="lkd" oninput="check_fields()" onkeydown="pressed_key(event)">
-					<span class="calculator_predictor_value_units" id="lkd_units" name="lkd_units"></span>
-				</div>
-			</div>
-			<div class="error" id="error_lkd">
-				<div class="error_triangle_container">
-					<span class="error_triangle_pre_box"></span>
-					<div class="error_triangle_box">
-						<span class="error_triangle_left_right_box"></span>
-						<span class="error_triangle"></span>
-						<span class="error_triangle_left_right_box"></span>
+				<div class="calculator_predictor">
+					<span class="calculator_predictor_name">Depth</span>
+					<div class="calculator_predictor_value">
+						<input type="number" value="" min="0" max="1000" id="rkd" name="rkd" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<span class="calculator_predictor_value_units" id="rkd_units" name="rkd_units"></span>
 					</div>
 				</div>
-				<div class="error_container">
-					<span class="error_pre_box"></span>
-					<span class="error_message" id="error_lkd_message"></span>
+				<div class="error" id="error_rkd">
+					<div class="error_triangle_container">
+						<span class="error_triangle_pre_box"></span>
+						<div class="error_triangle_box">
+							<span class="error_triangle_left_right_box"></span>
+							<span class="error_triangle"></span>
+							<span class="error_triangle_left_right_box"></span>
+						</div>
+					</div>
+					<div class="error_container">
+						<span class="error_pre_box"></span>
+						<span class="error_message" id="error_rkd_message"></span>
+					</div>
+				</div>
+				<div class="calculator_input_kidney_side">Left kidney</div>
+				<div class="calculator_predictor">
+					<span class="calculator_predictor_name">Height</span>
+					<div class="calculator_predictor_value">
+						<input type="number" value="" min="0" max="1000" id="lkh" name="lkh" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<span class="calculator_predictor_value_units" id="lkh_units" name="lkh_units"></span>
+					</div>
+				</div>
+				<div class="error" id="error_lkh">
+					<div class="error_triangle_container">
+						<span class="error_triangle_pre_box"></span>
+						<div class="error_triangle_box">
+							<span class="error_triangle_left_right_box"></span>
+							<span class="error_triangle"></span>
+							<span class="error_triangle_left_right_box"></span>
+						</div>
+					</div>
+					<div class="error_container">
+						<span class="error_pre_box"></span>
+						<span class="error_message" id="error_lkh_message"></span>
+					</div>
+				</div>
+				<div class="calculator_predictor">
+					<span class="calculator_predictor_name">Width</span>
+					<div class="calculator_predictor_value">
+						<input type="number" value="" min="0" max="1000" id="lkw" name="lkw" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<span class="calculator_predictor_value_units" id="lkw_units" name="lkw_units"></span>
+					</div>
+				</div>
+				<div class="error" id="error_lkw">
+					<div class="error_triangle_container">
+						<span class="error_triangle_pre_box"></span>
+						<div class="error_triangle_box">
+							<span class="error_triangle_left_right_box"></span>
+							<span class="error_triangle"></span>
+							<span class="error_triangle_left_right_box"></span>
+						</div>
+					</div>
+					<div class="error_container">
+						<span class="error_pre_box"></span>
+						<span class="error_message" id="error_lkw_message"></span>
+					</div>
+				</div>
+				<div class="calculator_predictor">
+					<span class="calculator_predictor_name">Depth</span>
+					<div class="calculator_predictor_value">
+						<input type="number" value="" min="0" max="1000" id="lkd" name="lkd" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<span class="calculator_predictor_value_units" id="lkd_units" name="lkd_units"></span>
+					</div>
+				</div>
+				<div class="error" id="error_lkd">
+					<div class="error_triangle_container">
+						<span class="error_triangle_pre_box"></span>
+						<div class="error_triangle_box">
+							<span class="error_triangle_left_right_box"></span>
+							<span class="error_triangle"></span>
+							<span class="error_triangle_left_right_box"></span>
+						</div>
+					</div>
+					<div class="error_container">
+						<span class="error_pre_box"></span>
+						<span class="error_message" id="error_lkd_message"></span>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="calculator_output">
 			<div class="calculator_output_buttons">
 				<button role="button" class="calculate" id="calculate" name="calculate" onClick="calculate()" disabled>Calculate</button>

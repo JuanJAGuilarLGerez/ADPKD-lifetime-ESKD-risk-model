@@ -1,11 +1,13 @@
 var units_general = "";
 var units_creatinine = "";
+var tkv_or_measurements = "";
 var sex = "";
 var age = "";
 var height_input_m = "";
 var height_input_ft = "";
 var height_input_in = "";
 var creatinine_input = "";
+var tkv_input = "";
 var rkh_input = "";
 var rkw_input = "";
 var rkd_input = "";
@@ -21,7 +23,7 @@ var lkh_output = "";
 var lkw_output = "";
 var lkd_output = "";
 var gfr_1 = "";
-var tkv = "";
+var tkv_output = "";
 var adj_tkv = "";
 var kgr_raw = "";
 var kgr = "";
@@ -48,6 +50,7 @@ var sex_checked = "";
 var age_checked = "";
 var height_checked = "";
 var creatinine_checked = "";
+var tkv_checked = "";
 var rkh_checked = "";
 var rkw_checked = "";
 var rkd_checked = "";
@@ -172,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
 function check_fields(){
 	
     var calculate = document.getElementById("calculate")
@@ -182,6 +184,7 @@ function check_fields(){
 	height_input_ft = document.getElementById("height_imperial_ft").value;
 	height_input_in = document.getElementById("height_imperial_in").value;
 	creatinine_input = document.getElementById("creatinine").value;
+	tkv_input = document.getElementById("tkv").value;
 	rkh_input = document.getElementById("rkh").value;
 	rkw_input = document.getElementById("rkw").value;
 	rkd_input = document.getElementById("rkd").value;
@@ -193,6 +196,7 @@ function check_fields(){
 	age_checked = "";
 	height_checked = "";
 	creatinine_checked = "";
+	tkv_checked = "";
 	rkh_checked = "";
 	rkw_checked = "";
 	rkd_checked = "";
@@ -394,7 +398,7 @@ function check_fields(){
 		document.getElementById("error_lkw_message").innerHTML = "";	
 		lkw_checked = 1;
 	}
-
+	
 	if (lkd_input == "") {
 		document.getElementById("error_lkd").style.display = "none";
 		document.getElementById("error_lkd_message").innerHTML = "";	
@@ -416,33 +420,51 @@ function check_fields(){
 		lkd_checked = 1;
 	}
 	
+	if (tkv_input == "") {
+		document.getElementById("error_tkv").style.display = "none";
+		document.getElementById("error_tkv_message").innerHTML = "";	
+	} else
+	if (tkv_input < 150 || tkv_input > 6000) {		
+		document.getElementById("error_tkv").style.display = "block";
+		document.getElementById("error_tkv_message").innerHTML = "TKV must be 150-6000 ml";	
+	} else {
+		document.getElementById("error_tkv").style.display = "none";
+		document.getElementById("error_tkv_message").innerHTML = "";	
+		tkv_checked = 1;
+	}
+	
+		
 	if 	((sex_checked == 1) &
 		(age_checked == 1) &
 		(height_checked == 1) &
 		(creatinine_checked == 1) &
+		(tkv_or_measurements == "measurements") &
 		(rkh_checked == 1) &
 		(rkw_checked == 1) &
 		(rkd_checked == 1) &
 		(lkh_checked == 1) &
 		(lkw_checked == 1) &
 		(lkd_checked == 1))
-
-		{calculate.disabled = false} else {calculate.disabled = true};
+		 
+		{calculate.disabled = false} else if
+			
+		((sex_checked == 1) &
+		(age_checked == 1) &
+		(height_checked == 1) &
+		(creatinine_checked == 1) &
+		(tkv_or_measurements == "tkv") &
+		(tkv_checked == 1))
 	
+		{calculate.disabled = false} else {calculate.disabled = true}
 }
 
 function pressed_key(event) {
 	
-		if 	((sex_checked == 1) &
+	if 	((sex_checked == 1) &
 		(age_checked == 1) &
 		(height_checked == 1) &
 		(creatinine_checked == 1) &
-		(rkh_checked == 1) &
-		(rkw_checked == 1) &
-		(rkd_checked == 1) &
-		(lkh_checked == 1) &
-		(lkw_checked == 1) &
-		(lkd_checked == 1) &
+		(tkv_checked == 1) &
 		(event.key === "Enter"))
 			
 		{calculate()}
@@ -514,6 +536,21 @@ function creatinine_units_mmol() {
 	units_creatinine = "mmol";
 }
 
+function enter_tkv() {
+	document.getElementById("enter_tkv").classList.add("button_grey_clicked");
+	document.getElementById("enter_measurements").classList.remove("button_grey_clicked");
+	document.getElementById("calculator_input_measurements").style.display = "none";
+	document.getElementById("calculator_input_tkv").style.display = "block";
+	tkv_or_measurements = "tkv";
+}
+
+function enter_measurements() {
+	document.getElementById("enter_measurements").classList.add("button_grey_clicked");
+	document.getElementById("enter_tkv").classList.remove("button_grey_clicked");
+	document.getElementById("calculator_input_measurements").style.display = "block";
+	document.getElementById("calculator_input_tkv").style.display = "none";
+	tkv_or_measurements = "measurements";
+}
 
 function calculate() {
 	
@@ -552,9 +589,14 @@ function calculate() {
 	if (sex == "female" & creatinine_output <= 0.7) {gfr_1 = (142 * ((creatinine_output/0.7) ** -0.241) * (0.9938 ** age) * 1.012)}
 	if (sex == "female" & creatinine_output > 0.7) {gfr_1 = (142 * ((creatinine_output/0.7) ** -1.2) * (0.9938 ** age) * 1.012)}
 	
-	tkv = ((3.1416/6) * rkh_output * rkw_output * rkd_output) + ((3.1416/6) * lkh_output * lkw_output * lkd_output)
+	if (tkv_or_measurements == "tkv") {
+		tkv_output = tkv_input
+	} else 
+	if (tkv_or_measurements == "measurements") {
+		tkv_output = ((3.1416/6) * rkh_output * rkw_output * rkd_output) + ((3.1416/6) * lkh_output * lkw_output * lkd_output)
+	}
 	
-	adj_tkv = tkv / height_output
+	adj_tkv = tkv_output / height_output
 	
 	kgr_raw = (((adj_tkv / 200) ** (1 / age)) - 1) * 100
 	if (kgr_raw < 0) {kgr = 0} else {kgr = kgr_raw}
@@ -584,7 +626,7 @@ function calculate() {
 	if (esrd == 100) {risk_category = "Highest"}
 	
 	display_gfr = (Math.floor(gfr_1)) + units_gfr
-	display_tkv = (Math.floor(tkv)) + units_tkv
+	display_tkv = (Math.floor(tkv_output)) + units_tkv
 	display_kgr = ((Math.floor(kgr_mcc * 10))/10) + units_kgr
     display_esrd = (Math.floor(esrd)) + units_esrd
 	
@@ -621,6 +663,7 @@ function clean() {
 	document.getElementById("height_imperial_ft").value = "";
 	document.getElementById("height_imperial_in").value = "";
 	document.getElementById("creatinine").value = "";
+	document.getElementById("tkv").value = "";
 	document.getElementById("rkh").value = "";
 	document.getElementById("rkw").value = "";
 	document.getElementById("rkd").value = "";
@@ -628,8 +671,13 @@ function clean() {
 	document.getElementById("lkw").value = "";
 	document.getElementById("lkd").value = "";
 	sex = "";
+	tkv_or_measurements = "";
 	document.getElementById("sex_male").classList.remove("button_grey_clicked");
 	document.getElementById("sex_female").classList.remove("button_grey_clicked");	
+	document.getElementById("enter_tkv").classList.remove("button_grey_clicked");	
+	document.getElementById("enter_measurements").classList.remove("button_grey_clicked");	
+	document.getElementById("calculator_input_tkv").style.display = "none";
+	document.getElementById("calculator_input_measurements").style.display = "none";
     document.getElementById("calculate").disabled = true;
 	document.getElementById("calculator_output_result_risk_box_1").style.borderWidth = "thin";	document.getElementById("calculator_output_result_risk_box_2").style.borderWidth = "thin";
 	document.getElementById("calculator_output_result_risk_box_3").style.borderWidth = "thin";
@@ -640,6 +688,7 @@ function clean() {
 	age_checked = "";
 	height_checked = "";
 	creatinine_checked = "";
+	tkv_checked = "";
 	rkh_checked = "";
 	rkw_checked = "";
 	rkd_checked = "";

@@ -450,6 +450,44 @@ section {
 	border: solid #953031 .3mm;
 }
 
+.calculator_input_tkv_or_measurements {
+	display:flex;
+	margin: 1em 0 0 0;
+	border-top: solid #CCCCCC .3mm;
+	padding: 1.2em 0 0 0;
+
+}
+
+.enter_measurements{
+	width:50%;
+	flex-grow:9999;
+	padding:.7em;
+	border-radius:.3em 0 0 .3em;
+	margin:0 -.2em 0 0;
+	border: solid #868686 .3mm;
+
+}
+
+.enter_tkv{
+	width:50%;
+	flex-grow:9999;
+	padding:.7em;
+	border-radius:0 .3em .3em 0;
+	margin:0 0 0 -.2em;
+	border: solid #868686 .3mm;
+
+}
+
+#calculator_input_measurements{
+	display:none;
+}
+
+#calculator_input_tkv{
+	margin:1em 0 0 0;
+	display:none;	
+}
+
+
 .calculator_output {
 	width:20em;
 	flex-grow: 9999;
