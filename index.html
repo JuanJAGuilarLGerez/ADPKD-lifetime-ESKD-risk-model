@@ -79,7 +79,7 @@
 			<div class="calculator_predictor">
 				<span class="calculator_predictor_name">Age</span>
 				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="80" id="age" name="age" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<input type="number" inputmode="numeric" value="" min="0" max="80" id="age" name="age" oninput="check_fields()" onkeydown="pressed_key(event)">
 					<span class="calculator_predictor_value_units_years">years</span>
 				</div>
 			</div>
@@ -98,13 +98,13 @@
 			<div class="calculator_predictor">
 				<span class="calculator_predictor_name">Height</span>
 				<div class="calculator_predictor_value_height_international" id="calculator_predictor_value_height_international">
-					<input type="number" value="" min="0" max="100" id="height_international" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<input type="number" inputmode="decimal" value="" min="0" max="100" id="height_international" oninput="check_fields()" onkeydown="pressed_key(event)">
 					<span class="calculator_predictor_value_units" id="height_international_units"></span>
 				</div>
 				<div class="calculator_predictor_value_height_imperial" id="calculator_predictor_value_height_imperial">
-					<input type="number" value="" min="0" max="100" id="height_imperial_ft" name="height_imperial_ft" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<input type="number" inputmode="numeric" value="" min="0" max="100" id="height_imperial_ft" name="height_imperial_ft" oninput="check_fields()" onkeydown="pressed_key(event)">
 					<span id="height_imperial_units_ft">ft</span>
-					<input type="number" value="" min="0" max="100" id="height_imperial_in" name="height_imperial_in" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<input type="number" inputmode="numeric" value="" min="0" max="100" id="height_imperial_in" name="height_imperial_in" oninput="check_fields()" onkeydown="pressed_key(event)">
 					<span id="height_imperial_units_in">in</span>
 				</div>
 			</div>
@@ -125,7 +125,7 @@
 			<div class="calculator_predictor">
 				<span class="calculator_predictor_name">Serum creatinine</span>
 				<div class="calculator_predictor_value">
-					<input type="number" value="" min="0" max="10" id="creatinine" name="creatinine" oninput="check_fields()" onkeydown="pressed_key(event)">
+					<input type="number" inputmode="decimal" value="" min="0" max="10" id="creatinine" name="creatinine" oninput="check_fields()" onkeydown="pressed_key(event)">
 					<div class="creatinine_units">
 						<button role="button" class="creatinine_units_mg button_grey" id="creatinine_units_mg" name="creatinine_units_mg" onClick="creatinine_units_mg(); check_fields()">mg/dl</button>
 						<button role="button" class="creatinine_units_mmol button_grey" id="creatinine_units_mmol" name="creatinine_units_mmol" onClick="creatinine_units_mmol(); check_fields()">μmol/l</button>
@@ -156,7 +156,7 @@
 				<div class="calculator_predictor">
 					<span class="calculator_predictor_name">Total kidney volume</span>
 					<div class="calculator_predictor_value">
-						<input type="number" value="" min="150" max="6000" id="tkv" name="tkv" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<input type="number" inputmode="numeric" value="" min="150" max="6000" id="tkv" name="tkv" oninput="check_fields()" onkeydown="pressed_key(event)">
 						<span class="calculator_predictor_value_units">ml</span>
 					</div>		
 				</div>
@@ -182,7 +182,7 @@
 				<div class="calculator_predictor">
 					<span class="calculator_predictor_name">Height</span>
 					<div class="calculator_predictor_value">
-						<input type="number" value="" min="0" max="1000" id="rkh" name="rkh" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<input type="number" inputmode="numeric" value="" min="0" max="1000" id="rkh" name="rkh" oninput="check_fields()" onkeydown="pressed_key(event)">
 						<span class="calculator_predictor_value_units" id="rkh_units" name="rkh_units"></span>
 					</div>
 				</div>
@@ -203,7 +203,7 @@
 				<div class="calculator_predictor">
 					<span class="calculator_predictor_name">Width</span>
 					<div class="calculator_predictor_value">
-						<input type="number" value="" min="0" max="1000" id="rkw" name="rkw" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<input type="number" inputmode="numeric" value="" min="0" max="1000" id="rkw" name="rkw" oninput="check_fields()" onkeydown="pressed_key(event)">
 						<span class="calculator_predictor_value_units" id="rkw_units" name="rkw_units"></span>
 					</div>
 				</div>
@@ -224,7 +224,7 @@
 				<div class="calculator_predictor">
 					<span class="calculator_predictor_name">Depth</span>
 					<div class="calculator_predictor_value">
-						<input type="number" value="" min="0" max="1000" id="rkd" name="rkd" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<input type="number" inputmode="numeric" value="" min="0" max="1000" id="rkd" name="rkd" oninput="check_fields()" onkeydown="pressed_key(event)">
 						<span class="calculator_predictor_value_units" id="rkd_units" name="rkd_units"></span>
 					</div>
 				</div>
@@ -246,7 +246,7 @@
 				<div class="calculator_predictor">
 					<span class="calculator_predictor_name">Height</span>
 					<div class="calculator_predictor_value">
-						<input type="number" value="" min="0" max="1000" id="lkh" name="lkh" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<input type="number" inputmode="numeric" value="" min="0" max="1000" id="lkh" name="lkh" oninput="check_fields()" onkeydown="pressed_key(event)">
 						<span class="calculator_predictor_value_units" id="lkh_units" name="lkh_units"></span>
 					</div>
 				</div>
@@ -267,7 +267,7 @@
 				<div class="calculator_predictor">
 					<span class="calculator_predictor_name">Width</span>
 					<div class="calculator_predictor_value">
-						<input type="number" value="" min="0" max="1000" id="lkw" name="lkw" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<input type="number" inputmode="numeric" value="" min="0" max="1000" id="lkw" name="lkw" oninput="check_fields()" onkeydown="pressed_key(event)">
 						<span class="calculator_predictor_value_units" id="lkw_units" name="lkw_units"></span>
 					</div>
 				</div>
@@ -288,7 +288,7 @@
 				<div class="calculator_predictor">
 					<span class="calculator_predictor_name">Depth</span>
 					<div class="calculator_predictor_value">
-						<input type="number" value="" min="0" max="1000" id="lkd" name="lkd" oninput="check_fields()" onkeydown="pressed_key(event)">
+						<input type="number" inputmode="numeric" value="" min="0" max="1000" id="lkd" name="lkd" oninput="check_fields()" onkeydown="pressed_key(event)">
 						<span class="calculator_predictor_value_units" id="lkd_units" name="lkd_units"></span>
 					</div>
 				</div>
