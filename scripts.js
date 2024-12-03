@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
 function check_fields(){
 	
     var calculate = document.getElementById("calculate")
