@@ -159,6 +159,15 @@ section {
 	margin: .5em 0 .5em 0;
 }
 
+.message_reviewers {
+	background-color:#E6C9C9;
+	color: #7C0002;
+	padding: .6em 1em 1em 1em;
+	border-radius:.3em;
+	margin:.3em .3em 1em .3em;
+	border: solid #7C0002 .3mm;
+}
+
 .hidden {
 	display: none;
 }
